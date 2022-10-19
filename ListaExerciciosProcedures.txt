@@ -1,0 +1,59 @@
+CREATE DATABASE sistema;
+use sistema;
+
+CREATE TABLE produto(
+cd INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(100),
+valor DECIMAL(10,2),
+qtd INT);
+
+INSERT INTO produto (nome, valor, qtd) 
+VALUES
+("carro", 25.50, 1000),
+("pasta", 50, 1000),
+("ovo", 200, 1000),
+("leite", 48, 1000);
+
+CREATE TABLE cliente(
+cd INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(100));
+
+INSERT INTO cliente (nome) VALUES
+("Rodolfo"),
+("Wellington"),
+("Jonas"),
+("Oswaldo"),
+("Paulo");
+
+CREATE TABLE vendedor(
+cd INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(100)
+)
+INSERT INTO vendedor (nome) VALUES
+("Vendedor 1"),
+("Vendedor 2");
+
+CREATE TABLE pedido(
+cd INT PRIMARY KEY AUTO_INCREMENT,
+id_vendedor INT,
+id_cliente INT,
+id_produto INT,
+qtd INT,
+FOREIGN KEY (id_produto) REFERENCES produto (cd),
+FOREIGN KEY (id_cliente) REFERENCES cliente (cd)
+FOREIGN KEY (id_vendedor) REFERENCES vendedor (cd)
+);
+CREATE TABLE comissao(
+id_pedido INT,
+id_vendedor INT,
+valor DECIMAL(10,2),
+FOREIGN KEY (id_pedido) REFERENCES pedido (cd)
+FOREIGN KEY (id_vendedor) REFERENCES vendedor (cd)
+);
+
+EXERCÍCIO - PROCEDURES
+- OBSERVE A ESTRUTURA DAS TABELAS DO BANCO DE DADOS ACIMA. A
+
+1) CRIE UM PROCEDIMENTO PARA REGISTRAR UM PEDIDO, ATUALIZANDO A QUANTIDADE EM ESTOQUE DO PRODUTO, CALCULANDO E REGISTRANDO A COMISSÃO(5%) DO VENDEDOR RESPONSAVEL PELO PEDIDO
+
+2) CRIE UM PROCEDIMENTO PARA CANCELAR UM PEDIDO, DEVOLVENDO A QUANTIDADE AO ESTOQUE DO PRODUTO, REMOVENDO O PEDIDO E A COMISSAO DO VENDEDOR RESPONSAVEL PELO PEDIDO.
